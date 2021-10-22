@@ -1,5 +1,9 @@
 <?php
 require_once("controladores/controlador.php");
+if (!isset($_SESSION['usuario'])) {
+    header("Location:index.php");
+    exit();
+}
 if (isset($_POST['borrar'])) {
     $id_acc = $_POST['borrar'];
     $sql = "DELETE FROM acciones WHERE acc_id = $id_acc";
