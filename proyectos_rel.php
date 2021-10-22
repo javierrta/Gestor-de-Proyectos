@@ -94,6 +94,18 @@
             background-color: IndianRed;
         }
     </style>
+
+    <script>
+
+        function fAccion(accion, id){
+            //console.log(accion + " - " + id);
+            document.getElementById("input_accion").value = accion;
+            document.getElementById("input_id").value = id;
+
+
+        }
+    </script>
+
 </head>
 
 <body>
@@ -182,19 +194,26 @@
                             <?php echo($registro->sit_nombre) ?>
                         </td>
                     
-                        <td class="accion" onclick="fModificar('m')">Modificar</td>
-                        <td class="accion" onclick="fBorrar('b')">Borrar</td>
-                        <td class="accion" onclick="fConsultar('c')">Consultar</td>                    
+                        <td class="accion" onclick="fAccion('m', <?=$proy_id?>)">Modificar</td>
+                        <td class="accion" onclick="fAccion('b', <?=$proy_id?>)">Borrar</td>
+                        <td class="accion" onclick="fAccion('c', <?=$proy_id?>)">Consultar</td>                    
                 </tr>
                    
                 <?php endif; ?>
-        
+                
                 <?php endforeach; ?>
 
                 <tr>
                     <td colspan="13" class="anadir">Añadir un nuevo proyecto</td>
                 </tr>
             </table>
+
+            <?php
+                echo "<form action='proyectos_frm.php' method='POST' id='frm_envio'>";
+                    echo "<input type='text' id='input_accion' name='accion' value=''>";
+                    echo "<input type='text' id='input_id' name='proy_id' value=''>";
+                echo "</form>";
+            ?>
         </div>
 
         <br><br><br>

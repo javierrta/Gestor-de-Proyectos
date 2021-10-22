@@ -1,6 +1,13 @@
 <?php
 
 /**
+ * Variables de sesión:
+ * - $_SESSION['usu_id']
+ * - $_SESSION['usu_nombre']
+ * - $_SESSION['usu_password']
+ * - $_SESSION['usu_apellido'] // Por si acaso
+ * - $_SESSION['usu_cat_id']
+ * 
  * Valores de opciones select del campo "categoría":
  * - proyect (Jefe de proyecto)
  * - action (Responsable de acción)
