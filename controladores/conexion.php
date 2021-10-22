@@ -1,9 +1,8 @@
 <?php
 
-//require_once("configuracion.php");
+require_once("configuracion.php");
 
-
-class Conexion
+class conexion
 {
 
     public static function conectar()
