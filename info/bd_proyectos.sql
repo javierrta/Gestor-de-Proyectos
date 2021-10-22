@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-10-2021 a las 13:46:34
+-- Tiempo de generación: 22-10-2021 a las 12:11:08
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.3.27
 
@@ -197,15 +197,15 @@ INSERT INTO `usuarios` (`usu_id`, `usu_nombre`, `usu_password`, `usu_cat_id`) VA
 (6, 'Responsable de tarea 2', '81dc9bdb52d04dc20036dbd8313ed055', 3),
 (7, 'Usuario 1', '81dc9bdb52d04dc20036dbd8313ed055', 4),
 (8, 'Usuario 2', '81dc9bdb52d04dc20036dbd8313ed055', 4),
-(9, 'José Luis', '1234', 1),
-(10, 'Alvaro', '1234', 1),
-(11, 'Alberto', '1234', 1),
-(12, 'Adrián', '1234', 1),
-(13, 'Jorge', '1234', 1),
-(14, 'José Ignacio', '1234', 1),
-(15, 'Javier', '1234', 1),
-(16, 'Oswaldo', '1234', 1),
-(17, 'Angel', '1234', 1);
+(9, 'José Luis', '81dc9bdb52d04dc20036dbd8313ed055', 1),
+(10, 'Alvaro', '81dc9bdb52d04dc20036dbd8313ed055', 1),
+(11, 'Alberto', '81dc9bdb52d04dc20036dbd8313ed055', 1),
+(12, 'Adrián', '81dc9bdb52d04dc20036dbd8313ed055', 1),
+(13, 'Jorge', '81dc9bdb52d04dc20036dbd8313ed055', 1),
+(14, 'José Ignacio', '81dc9bdb52d04dc20036dbd8313ed055', 1),
+(15, 'Javier', '81dc9bdb52d04dc20036dbd8313ed055', 1),
+(16, 'Oswaldo', '81dc9bdb52d04dc20036dbd8313ed055', 1),
+(17, 'Angel', '81dc9bdb52d04dc20036dbd8313ed055', 1);
 
 --
 -- Índices para tablas volcadas

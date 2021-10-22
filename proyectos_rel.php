@@ -1,15 +1,19 @@
 <?php
     require_once("controladores/controlador.php");
 
-    if (!isset($_SESSION['usu_id'])) {
-        //$usu_id = $_SESSION['usu_id'];
-        $usu_id = "1";
-        //$usu_nombre = $_SESSION['usu_nombre'];
-        $usu_nombre = "Jefe de proyecto 1";
+    if (!isset($_SESSION['usuario'])) {
+        header("Location:index.php");
+        exit();
+    } else {
+        $usu_id = $_SESSION['usuario']->usu_id;
+        //$usu_id = "1";
+        $usu_nombre = $_SESSION['usuario']->usu_nombre;
+        //$usu_nombre = "Jefe de proyecto 1";
 
-        $sql = "SELECT * FROM proyectos, usuarios, situaciones
-                            WHERE usu_id = proy_usu_id AND sit_id = proy_sit_id
-                            ORDER BY proy_id";
+        $sql = "SELECT p.*, u.usu_nombre, s.sit_nombre 
+                FROM proyectos as p, usuarios as u, situaciones as s
+                WHERE usu_id = proy_usu_id AND sit_id = proy_sit_id
+                ORDER BY proy_id";
         $datos_recibidos = controlador::select($sql);
         $datos = json_decode($datos_recibidos);
     }
@@ -94,6 +98,17 @@
             background-color: IndianRed;
         }
     </style>
+
+    <script>
+
+        function fAccion(accion, id){
+            console.log(accion + " - " + id);
+            document.getElementById("input_accion").value = accion;
+            document.getElementById("input_id").value = id;
+            document.getElementById("frm_envio").submit();
+        }
+    </script>
+
 </head>
 
 <body>
@@ -120,7 +135,10 @@
                     <th colspan="3">Acciones</th>
                 </tr>
 
-                <?php foreach ($datos as $registro) : ?>
+                <?php foreach ($datos as $registro) : 
+                    $proy_id = $registro->proy_id;
+                    ?>
+                    
 
                 <?php if (($registro->proy_usu_id) == $usu_id) : ?>           
                    
@@ -182,19 +200,26 @@
                             <?php echo($registro->sit_nombre) ?>
                         </td>
                     
-                        <td class="accion" onclick="fModificar('m')">Modificar</td>
-                        <td class="accion" onclick="fBorrar('b')">Borrar</td>
-                        <td class="accion" onclick="fConsultar('c')">Consultar</td>                    
+                        <td class="accion" onclick="fAccion('m', <?=$proy_id?>)">Modificar</td>
+                        <td class="accion" onclick="fAccion('b', <?=$proy_id?>)">Borrar</td>
+                        <td class="accion" onclick="fAccion('c', <?=$proy_id?>)">Consultar</td>                    
                 </tr>
                    
                 <?php endif; ?>
-        
+                
                 <?php endforeach; ?>
 
                 <tr>
                     <td colspan="13" class="anadir">Añadir un nuevo proyecto</td>
                 </tr>
             </table>
+
+            <?php
+                echo "<form action='proyectos_frm.php' method='POST' id='frm_envio'>";
+                    echo "<input type='text' id='input_accion' name='input_accion' value=''>";
+                    echo "<input type='text' id='input_id' name='input_proy_id' value=''>";
+                echo "</form>";
+            ?>
         </div>
 
         <br><br><br>
@@ -279,7 +304,7 @@
                         <?php echo($registro->sit_nombre) ?>
                     </td>                  
            
-                    <td colspan="3" class="accion_otros">Consultar</td>              
+                    <td colspan="3" class="accion_otros" onclick="fAccion('c', <?=$proy_id?>)">Consultar</td>              
                 </tr>
                    
                 <?php endif; ?>
