@@ -46,7 +46,7 @@ if (isset($_POST['agregado']) || isset($_POST['modificado'])) {
             border: 1px solid black;
         }
         input[type=number] {
-            width: 30px;
+            width: 40px;
         }
     </style>
 </head>
