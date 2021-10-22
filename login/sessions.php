@@ -1,6 +1,13 @@
 <?php
 
 /**
+ * Variables de sesión:
+ * - $_SESSION['usu_id']
+ * - $_SESSION['usu_nombre']
+ * - $_SESSION['usu_password']
+ * - $_SESSION['usu_apellido'] // Por si acaso
+ * - $_SESSION['usu_cat_id']
+ * 
  * Valores de opciones select del campo "categoría":
  * - proyect (Jefe de proyecto)
  * - action (Responsable de acción)
@@ -18,7 +25,7 @@ $action = $_GET['action'] ?? $_POST['action'] ?? 'acceso';
 
 // No establecer las variables de sesión hasta enviar el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_once 'controladores/conexion_alvaro.php';
+    require_once 'controladores/conexion.php';
 
     // Conexión temporal a la tabla de usuarios para pruebas de rendimiento
     // TODO: Asegurar la consulta y modificarla con los datos introducidos

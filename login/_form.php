@@ -1,3 +1,6 @@
+<!--
+    TODO: El formulario de registro no es funcional, es un simple escaparate.
+-->
 <?php
 require_once 'sessions.php';
 require_once 'validation.php'
