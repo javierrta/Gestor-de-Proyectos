@@ -3,6 +3,8 @@ require_once("controladores/controlador.php");
 // if (!isset($_SESSION['usuario'])) {
 //     header("Location:index.php");
 //     exit();
+// }else {
+//     $usuario_id_logueado = $_SESSION['usuario']->usu_id;
 // }
 if (isset($_POST['borrar'])) {
     $id_acc = $_POST['borrar'];
