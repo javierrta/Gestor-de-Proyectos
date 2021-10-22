@@ -54,8 +54,8 @@ if (isset($_POST['agregado']) || isset($_POST['modificado'])) {
 <body>
     <div id="datos">
         <?php
-        if (isset($_POST['proyecto'])) {
-            $id_proyecto = $_POST['proyecto'];
+        if (isset($_POST['proy_id'])) {
+            $id_proyecto = $_POST['proy_id'];
         } else {
             $id_proyecto = 2;
         }
@@ -102,8 +102,8 @@ if (isset($_POST['agregado']) || isset($_POST['modificado'])) {
                     </form>";
             $t .= "</td>";
             }else {
-                $t .= "<form action='' method='POST'>" .
-                "<input type='hidden' name='acciones' value='$accion_id'><input type='submit' value='Consultar'>
+                $t .= "<form action='tareas_rel.php' method='POST'>" .
+                "<input type='hidden' name='acc_id' value='$accion_id'><input type='submit' value='Consultar'>
                     </form>";
             }
 
