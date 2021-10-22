@@ -37,6 +37,8 @@ if (!isset($_SESSION['id'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relación de tareas</title>
+    <br/><br/><br/>
+    <button onclick="location.href='tareas_frm.php'">Añadir acción</button>
 </head>
 <body>
 <header>
@@ -45,39 +47,17 @@ if (!isset($_SESSION['id'])) {
 <main>
     <table>
         <tr>
-            <th>
-                id de tarea
-            </th>
-            <th>
-                nombre de tarea
-            </th>
-            <th>
-                F. real inicio
-            </th>
-            <th>
-                F. real fin
-            </th>
-            <th>
-                F. teórica inicio
-            </th>
-            <th>
-                F. teórica fin
-            </th>
-            <th>
-                id de usuario
-            </th>
-            <th>
-                duración
-            </th>
-            <th>
-                situación
-            </th>
-            <th>
-                id de acción
-            </th>
-            <th>
-                observaciones
-            </th>
+            <th>id de tarea</th>
+            <th>nombre de tarea</th>
+            <th>F. real inicio</th>
+            <th>F. real fin</th>
+            <th>F. teórica inicio</th>
+            <th>F. teórica fin</th>
+            <th>id de usuario</th>
+            <th>duración</th>
+            <th>situación</th>
+            <th>id de acción</th>
+            <th>observaciones</th>
             <?php if ($usuId == $usuId) : ?>
                 <th style="border: greenyellow 1px solid; ">
                     Modificar
