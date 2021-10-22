@@ -5,11 +5,6 @@ if (isset ($_POST['borrar'])) {
     $sql = "DELETE FROM acciones WHERE acc_id = $id_acc";
     controlador::delete($sql);
 }
-if (isset ($_POST['modificar'])) {
-    
-}
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -21,8 +16,9 @@ if (isset ($_POST['modificar'])) {
 <body>
     <div id="datos">
         <?php
-        $id_proyecto = $_POST['proyecto'];
-        $sql = "SELECT * FROM acciones WHERE acc_proy_id = $id_proyecto ORDER BY acc_nombre";
+        // $id_proyecto = $_POST['proyecto'];
+        // $sql = "SELECT * FROM acciones WHERE acc_proy_id = $id_proyecto ORDER BY acc_nombre";
+        $sql = "SELECT * FROM acciones ORDER BY acc_nombre";
         $lista = json_decode(controlador::select($sql), true);
         $t = "<table><tr><th>ID</th><th>ACCIÓN</th><th>FECHA REAL INICIO</th><th>FECHA REAL FIN</th><th>FECHA TEÓRICA INICIO</th><th>FECHA TEÓRICA FIN</th><th>ID USUARIO</th><th>DURACIÓN</th><th>ID SITUACIÓN</th><th>ID PROYECTO</th><th>OBSERVACIONES</th><th>ACCIONES</th></tr>";
         for ($i = 0; $i<count($lista); $i++) {
@@ -38,11 +34,21 @@ if (isset ($_POST['modificar'])) {
             $t .= "<td>" . $lista[$i]["acc_sit_id"] . "</td>";
             $t .= "<td>" . $lista[$i]["acc_proy_id"] . "</td>";
             $t .= "<td>" . $lista[$i]["acc_obs"] . "</td>";
-            if ($lista[$i]["acc_usu_id"] == $_SESSION['usuario']['usu_id']) {
-                $t .= "<td><frm method='POST'><input type='hidden' name='modificar' value='$lista[$i][\"acc_id\"]'><input type='submit' value='Modificar'></form>" . "<frm method='POST'><input type='hidden' name='borrar' value='$lista[$i][\"acc_id\"]'><input type='submit' value='Borrar'></form></td>";
-            }else {
-                $t .= "<td></td>";
-            }
+            $t .= "<td>";
+            $accion_id = $lista[$i]["acc_id"];
+            $t .= "<form action='acciones_frm.php' method='POST'>" .
+                        "<input type='hidden' name='modificar' value='$accion_id'><input type='submit' value='Modificar'>
+                    </form>" . 
+                    "<form action='' method='POST'>" .
+                        "<input type='hidden' name='borrar' value='$accion_id'><input type='submit' value='Borrar'>
+                    </form>";
+            $t .= "</td>";
+
+            // if ($lista[$i]["acc_usu_id"] == $_SESSION['usuario']['usu_id']) {
+            //     $t .= "<td><frm method='POST'><input type='hidden' name='modificar' value='$lista[$i][\"acc_id\"]'><input type='submit' value='Modificar'></form>" . "<frm method='POST'><input type='hidden' name='borrar' value='$lista[$i][\"acc_id\"]'><input type='submit' value='Borrar'></form></td>";
+            // }else {
+            //     $t .= "<td></td>";
+            // }
             
             $t .= "</tr>";
         }
