@@ -25,33 +25,19 @@ $action = $_GET['action'] ?? $_POST['action'] ?? 'acceso';
 
 // No establecer las variables de sesión hasta enviar el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_once 'controladores/conexion.php';
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-    // Conexión temporal a la tabla de usuarios para pruebas de rendimiento
-    // TODO: Asegurar la consulta y modificarla con los datos introducidos
-    $conn = new conexion();
-    $sql = "SELECT * FROM usuarios";
-    $query = $conn->conectar()->query($sql);
-    $users = $query->fetchAll(PDO::FETCH_ASSOC);
-
-    // Variables de sesión comunes en formulario de acceso/registro
-    $_SESSION['usu_nombre'] = trim($_POST['username']) ?? null;
-    $_SESSION['usu_password'] = trim($_POST['password']) ?? null;
-
-    // Variables de sesión solo en formulario de registro
-    if ($action === 'registro') {
-        $_SESSION['usu_apellido'] = trim($_POST['surname']) ?? null;
-        $_SESSION['usu_cat_id'] = trim($_POST['category']) ?? null;
-    }
-
-    foreach ($users as $user) {
-        // TODO: qué pasa con el id de dos usuarios con mismo nombre y contraseña?
-        if (
-            $_SESSION['usu_nombre'] === $user['usu_nombre'] &&
-            $_SESSION['usu_password'] === $user['usu_password']
-        ) {
-            $_SESSION['usu_id'] = $user['usu_id'];
-        }
+    require_once 'controladores/controlador.php';
+    // Obtener el usuario de la bd
+    $sql = "SELECT * FROM usuarios WHERE usu_nombre = '$username' AND usu_password = md5('$password')";
+    $userData = json_decode(controlador::select($sql));
+    if (count($userData) > 0) {
+        $_SESSION['usuario'] = $userData;
+        header('Location: proyectos_rel.php');
+        exit();
+    } else {
+        // Control de errores
     }
 }
 
