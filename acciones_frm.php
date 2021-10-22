@@ -17,7 +17,7 @@ if (isset($_POST['modificar'])) {
         $situaciones_id = $accion[$i]["acc_sit_id"];
         $proyecto_id = $accion[$i]["acc_proy_id"];
         $observaciones = $accion[$i]["acc_obs"];
-        $t .= "<label>ID<input type='number' name='id' id='id' value='$accion_id' disabled></label>";
+        $t .= "<label>ID<input type='number' name='id' id='id' value='$accion_id' readonly></label>";
         $t .= "<label>Nombre<input type='text' name='accion' id='accion' value='$nombre'></label>";
         $t .= "<label>Fecha real inicio<input type='date' name='f_r_ini' id='f_r_ini' value='$f_r_ini'></label>";
         $t .= "<label>Fecha real fin<input type='date' name='f_r_fin' id='f_r_fin' value='$f_r_fin'></label>";

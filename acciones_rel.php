@@ -19,14 +19,12 @@ if (isset($_POST['agregado']) || isset($_POST['modificado'])) {
     if (isset($_POST['agregado'])) {
         $sql = "INSERT INTO acciones VALUES (null, '$nombre_v', '$f_r_ini_v', '$f_r_fin_v', '$f_t_ini_v', '$f_t_fin_v', $usu_id_v, $duracion_v, $situaciones_id_v, $proyecto_id_v, '$observaciones_v')";
         $id_agregado = controlador::insert($sql);
-        echo "Insertado con el sql=" . $sql;
     }
     if (isset($_POST['modificado'])) {
-        $id_V = $_POST['id'];
+        $id_v = $_POST['id'];
 
-        $sql = "UPDATE acciones WHERE acc_id = $accion_id SET acc_nombre = '$nombre_v', acc_fr_inicio = $f_r_ini_v, acc_fr_fin = $f_r_fin_v, acc_ft_inicio = $f_t_ini_v, acc_ft_fin = $f_t_fin_v, acc_usu_id = $usu_id_v, acc_duracion = $duracion_v, acc_sit_id = $situaciones_id_v, acc_proy_id = $proyecto_id_v, acc_obs = '$observaciones_v')";
+        $sql = "UPDATE acciones SET acc_nombre = '$nombre_v', acc_fr_inicio = $f_r_ini_v, acc_fr_fin = $f_r_fin_v, acc_ft_inicio = $f_t_ini_v, acc_ft_fin = $f_t_fin_v, acc_usu_id = $usu_id_v, acc_duracion = $duracion_v, acc_sit_id = $situaciones_id_v, acc_proy_id = $proyecto_id_v, acc_obs = '$observaciones_v' WHERE acc_id = $id_v";
         $afectados = controlador::update($sql);
-        echo "Modificado con el sql=" . $sql;
     }
 }
 ?>
