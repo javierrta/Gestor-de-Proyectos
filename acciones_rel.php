@@ -15,10 +15,10 @@ if (isset($_POST['agregado']) || isset($_POST['modificado'])) {
     $f_r_fin_v = $_POST['f_r_fin'];
     $f_t_ini_v = $_POST['f_t_ini'];
     $f_t_fin_v = $_POST['f_t_fin'];
-    $usu_id_v = $_POST['usu_id'];
+    $usu_id_v = 15;
     $duracion_v = $_POST['duracion'];
     $situaciones_id_v = $_POST['id_sit'];
-    $proyecto_id_v = $_POST['id_proy'];
+    $proyecto_id_v = 2;
     $observaciones_v = $_POST['obs'];
     if (isset($_POST['agregado'])) {
         $sql = "INSERT INTO acciones VALUES (null, '$nombre_v', '$f_r_ini_v', '$f_r_fin_v', '$f_t_ini_v', '$f_t_fin_v', $usu_id_v, $duracion_v, $situaciones_id_v, $proyecto_id_v, '$observaciones_v')";
@@ -104,6 +104,7 @@ if (isset($_POST['agregado']) || isset($_POST['modificado'])) {
         }
         $t .= "<tr>";
         $num = max($ids) +1;
+        $t .= "<form method='POST'>";
         $t .= "<td><label><input type='number' name='id' id='id' value='$num' disabled></label></td>";
         $t .= "<td><label><input type='text' name='accion' id='accion'></label></td>";
         $t .= "<td><label><input type='date' name='f_r_ini' id='f_r_ini'></label></td>";
@@ -112,19 +113,20 @@ if (isset($_POST['agregado']) || isset($_POST['modificado'])) {
         $t .= "<td><label><input type='date' name='f_t_fin' id='f_t_fin'></label></td>";
         $t .= "<td><label><input type='number' name='usu_id' id='usu_id' value='$usu' disabled></label></td>";
         $t .= "<td><label><input type='number' name='duracion' id='duracion'></label></td>";
-        $t .= "<td><label><select>";
+        $t .= "<td><label><select name='id_sit'>";
         $sql2 = "SELECT * FROM situaciones";
         $situaciones = json_decode(controlador::select($sql2), true);
         for ($j = 0; $j <count($situaciones); $j++) {
             $sit_nombre = $situaciones[$j]['sit_nombre'];
             $sit_id = $situaciones[$j]['sit_id'];
-            $t .= "<option value='$sit_id'>" . $sit_nombre . "</option>";
+            $t .= "<option name='id_sit' value='$sit_id'>" . $sit_nombre . "</option>";
         }
         $t .= "</select></label></td>";
         $t .= "<td><label><input type='number' name='id_proy' id='proyecto_id' value='$id_proyecto' disabled></label></td>";
         $t .= "<td><label><textarea name='obs' id='obs' cols='10' rows='2'></textarea></label></td>";
-        $t .= "<td><input type='hidden' name='agregar'>";
+        $t .= "<td><input type='hidden' name='agregado'>";
         $t .= "<input type='submit' value='Agregar'></td>";
+        $t .= "</form>";
         $t .= "</tr>";
         $t .= "</table>";
         
