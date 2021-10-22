@@ -7,15 +7,17 @@
 
 require_once 'sessions.php';
 
-$errors = [];
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    foreach ($users as $user) {
+    $errors = [];
+
+    foreach ($userData as $data) {
         if (
-            $_SESSION['usu_nombre'] === $user['usu_nombre'] &&
-            md5($_SESSION['usu_password']) === $user['usu_password']
+            $_SESSION['usu_nombre'] === $data['usu_nombre'] &&
+            md5($_SESSION['usu_password']) === $data['usu_password']
         ) {
-            header('Location: login/success.php');
+            header('Location: proyectos_rel.php');
+        } else {
+            $errors = 'Usuario o contraseña incorrecto';
         }
     }
 }
