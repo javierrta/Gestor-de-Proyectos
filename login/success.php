@@ -17,7 +17,7 @@ require_once 'sessions.php'
         border-radius: 20px;
         box-shadow: 0 0 0 10px green;
         border: 5px solid white;
-        width: 75vw;
+        width: 50vw;
     }
 </style>
 
