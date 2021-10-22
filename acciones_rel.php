@@ -46,7 +46,7 @@ if (isset($_POST['agregado']) || isset($_POST['modificado'])) {
             border: 1px solid black;
         }
         input[type=number] {
-            width: 30px;
+            width: 40px;
         }
     </style>
 </head>
@@ -61,7 +61,12 @@ if (isset($_POST['agregado']) || isset($_POST['modificado'])) {
         }
         $sql = "SELECT * FROM acciones WHERE acc_proy_id = $id_proyecto";
         $lista = json_decode(controlador::select($sql), true);
-        $t = "<table><tr><th>ID</th><th>ACCIÓN</th><th>FECHA REAL INICIO</th><th>FECHA REAL FIN</th><th>FECHA TEÓRICA INICIO</th><th>FECHA TEÓRICA FIN</th><th>ID USUARIO</th><th>DURACIÓN</th><th>ID SITUACIÓN</th><th>ID PROYECTO</th><th>OBSERVACIONES</th><th>ACCIONES</th></tr>";
+        $sql_proy = "SELECT proy_nombre FROM proyectos WHERE proy_id = $id_proyecto";
+        $proyecto = json_decode(controlador::select($sql_proy), true);
+        for ($k=0; $k<count($proyecto); $k++) {
+            $t = "<h2>". $proyecto[$k]['proy_nombre'] ."</h2>";
+        }
+        $t .= "<table><tr><th>ID</th><th>ACCIÓN</th><th>FECHA REAL INICIO</th><th>FECHA REAL FIN</th><th>FECHA TEÓRICA INICIO</th><th>FECHA TEÓRICA FIN</th><th>ID USUARIO</th><th>DURACIÓN</th><th>ID SITUACIÓN</th><th>OBSERVACIONES</th><th>ACCIONES</th></tr>";
         $ids = array();
         for ($i = 0; $i < count($lista); $i++) {
             $ids[] = $lista[$i]["acc_id"];
@@ -75,7 +80,7 @@ if (isset($_POST['agregado']) || isset($_POST['modificado'])) {
             $t .= "<td>" . $lista[$i]["acc_usu_id"] . "</td>";
             $t .= "<td>" . $lista[$i]["acc_duracion"] . "</td>";
             $t .= "<td>" . $lista[$i]["acc_sit_id"] . "</td>";
-            $t .= "<td>" . $lista[$i]["acc_proy_id"] . "</td>";
+            // $t .= "<td>" . $lista[$i]["acc_proy_id"] . "</td>";
             $t .= "<td>" . $lista[$i]["acc_obs"] . "</td>";
             $t .= "<td>";
             $accion_id = $lista[$i]["acc_id"];
@@ -124,7 +129,7 @@ if (isset($_POST['agregado']) || isset($_POST['modificado'])) {
             $t .= "<option name='id_sit' value='$sit_id'>" . $sit_nombre . "</option>";
         }
         $t .= "</select></label></td>";
-        $t .= "<td><label><input type='number' name='id_proy' id='proyecto_id' value='$id_proyecto' disabled></label></td>";
+        // $t .= "<td><label><input type='number' name='id_proy' id='proyecto_id' value='$id_proyecto' disabled></label></td>";
         $t .= "<td><label><textarea name='obs' id='obs' cols='10' rows='2'></textarea></label></td>";
         $t .= "<td><input type='hidden' name='agregado'>";
         $t .= "<input type='submit' value='Agregar'></td>";

@@ -32,7 +32,7 @@ require_once 'validation.php'
     </form>
 
 <?php elseif ($action === 'registro') : ?>
-    <form id="register" method="post" action="validation.php" name="register-form">
+    <form id="register" method="post" action="" name="register-form">
         <header>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
                 <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
