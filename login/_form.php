@@ -1,3 +1,8 @@
+<?php
+require_once 'sessions.php';
+require_once 'validation.php'
+?>
+
 <?php if ($action === 'acceso') : ?>
     <form method="post" action="" name="login-form">
         <header>
