@@ -1,9 +1,9 @@
 <?php
 require_once("controladores/controlador.php");
-if (!isset($_SESSION['usuario'])) {
-    header("Location:index.php");
-    exit();
-}
+// if (!isset($_SESSION['usuario'])) {
+//     header("Location:index.php");
+//     exit();
+// }
 if (isset($_POST['borrar'])) {
     $id_acc = $_POST['borrar'];
     $sql = "DELETE FROM acciones WHERE acc_id = $id_acc";
@@ -39,14 +39,22 @@ if (isset($_POST['agregado']) || isset($_POST['modificado'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acciones</title>
+    <style>
+        td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 
 <body>
     <div id="datos">
         <?php
-        // $id_proyecto = $_POST['proyecto'];
-        // $sql = "SELECT * FROM acciones WHERE acc_proy_id = $id_proyecto ORDER BY acc_nombre";
-        $sql = "SELECT * FROM acciones ORDER BY acc_nombre";
+        if (isset($_POST['proyecto'])) {
+            $id_proyecto = $_POST['proyecto'];
+        } else {
+            $id_proyecto = 2;
+        }
+        $sql = "SELECT * FROM acciones WHERE acc_proy_id = $id_proyecto ORDER BY acc_nombre";
         $lista = json_decode(controlador::select($sql), true);
         $t = "<table><tr><th>ID</th><th>ACCIÓN</th><th>FECHA REAL INICIO</th><th>FECHA REAL FIN</th><th>FECHA TEÓRICA INICIO</th><th>FECHA TEÓRICA FIN</th><th>ID USUARIO</th><th>DURACIÓN</th><th>ID SITUACIÓN</th><th>ID PROYECTO</th><th>OBSERVACIONES</th><th>ACCIONES</th></tr>";
         for ($i = 0; $i < count($lista); $i++) {
@@ -64,26 +72,28 @@ if (isset($_POST['agregado']) || isset($_POST['modificado'])) {
             $t .= "<td>" . $lista[$i]["acc_obs"] . "</td>";
             $t .= "<td>";
             $accion_id = $lista[$i]["acc_id"];
-            $t .= "<form action='acciones_frm.php' method='POST'>" .
+
+            if (isset($_SESSION['usuario']['usu_id'])) {
+                $usu = $_SESSION['usuario']['usu_id'];
+            }else {
+                $usu = 15;
+            }
+            if ($lista[$i]["acc_usu_id"] == $usu) {
+                $t .= "<form action='acciones_frm.php' method='POST'>" .
                 "<input type='hidden' name='modificar' value='$accion_id'><input type='submit' value='Modificar'>
                     </form>" .
                 "<form action='' method='POST'>" .
                 "<input type='hidden' name='borrar' value='$accion_id'><input type='submit' value='Borrar'>
+                    </form>" . 
+                    "<form action='' method='POST'>" .
+                "<input type='hidden' name='acciones' value='$accion_id'><input type='submit' value='Consultar'>
                     </form>";
             $t .= "</td>";
-            // if ($lista[$i]["acc_usu_id"] == $_SESSION['usuario']['usu_id']) {
-            //     $t .= "<td>";
-            //     $accion_id = $lista[$i]["acc_id"];
-            //     $t .= "<form action='acciones_frm.php' method='POST'>" .
-            //                 "<input type='hidden' name='modificar' value='$accion_id'><input type='submit' value='Modificar'>
-            //             </form>" . 
-            //             "<form action='' method='POST'>" .
-            //                 "<input type='hidden' name='borrar' value='$accion_id'><input type='submit' value='Borrar'>
-            //             </form>";
-            //     $t .= "</td>";
-            // }else {
-            //     $t .= "<td></td>";
-            // }
+            }else {
+                $t .= "<form action='' method='POST'>" .
+                "<input type='hidden' name='acciones' value='$accion_id'><input type='submit' value='Consultar'>
+                    </form>";
+            }
 
             $t .= "</tr>";
         }
