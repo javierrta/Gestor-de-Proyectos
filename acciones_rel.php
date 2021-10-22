@@ -1,5 +1,15 @@
 <?php
-require_once("controladores/controlador.php")
+require_once("controladores/controlador.php");
+if (isset ($_POST['borrar'])) {
+    $id_acc = $_POST['borrar'];
+    $sql = "DELETE FROM acciones WHERE acc_id = $id_acc";
+    controlador::delete($sql);
+}
+if (isset ($_POST['modificar'])) {
+    
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -29,7 +39,7 @@ require_once("controladores/controlador.php")
             $t .= "<td>" . $lista[$i]["acc_proy_id"] . "</td>";
             $t .= "<td>" . $lista[$i]["acc_obs"] . "</td>";
             if ($lista[$i]["acc_usu_id"] == $_SESSION['usuario']['usu_id']) {
-                $t .= "<td>" . "<input type='button' value='Modificar'>" . "<input type='button' value='Borrar'>" . "</td>";
+                $t .= "<td><frm method='POST'><input type='hidden' name='modificar' value='$lista[$i][\"acc_id\"]'><input type='submit' value='Modificar'>" . "<input type='hidden' name='borrar' value='$lista[$i][\"acc_id\"]'><input type='submit' value='Borrar'></form></td>";
             }else {
                 $t .= "<td></td>";
             }
