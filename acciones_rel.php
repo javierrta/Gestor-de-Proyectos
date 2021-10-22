@@ -40,8 +40,11 @@ if (isset($_POST['agregado']) || isset($_POST['modificado'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acciones</title>
     <style>
-        td {
+        tr {
             border: 1px solid black;
+        }
+        input[type=number] {
+            width: 30px;
         }
     </style>
 </head>
@@ -54,10 +57,12 @@ if (isset($_POST['agregado']) || isset($_POST['modificado'])) {
         } else {
             $id_proyecto = 2;
         }
-        $sql = "SELECT * FROM acciones WHERE acc_proy_id = $id_proyecto ORDER BY acc_nombre";
+        $sql = "SELECT * FROM acciones WHERE acc_proy_id = $id_proyecto";
         $lista = json_decode(controlador::select($sql), true);
         $t = "<table><tr><th>ID</th><th>ACCIÓN</th><th>FECHA REAL INICIO</th><th>FECHA REAL FIN</th><th>FECHA TEÓRICA INICIO</th><th>FECHA TEÓRICA FIN</th><th>ID USUARIO</th><th>DURACIÓN</th><th>ID SITUACIÓN</th><th>ID PROYECTO</th><th>OBSERVACIONES</th><th>ACCIONES</th></tr>";
+        $ids = array();
         for ($i = 0; $i < count($lista); $i++) {
+            $ids[] = $lista[$i]["acc_id"];
             $t .= "<tr>";
             $t .= "<td>" . $lista[$i]["acc_id"] . "</td>";
             $t .= "<td>" . $lista[$i]["acc_nombre"] . "</td>";
@@ -97,10 +102,32 @@ if (isset($_POST['agregado']) || isset($_POST['modificado'])) {
 
             $t .= "</tr>";
         }
-        $t .= "<form action='acciones_frm.php' method='POST'>" .
-            "<input type='hidden' name='agregar'><input type='submit' value='Agregar'>
-                    </form>";
+        $t .= "<tr>";
+        $num = max($ids) +1;
+        $t .= "<td><label><input type='number' name='id' id='id' value='$num' disabled></label></td>";
+        $t .= "<td><label><input type='text' name='accion' id='accion'></label></td>";
+        $t .= "<td><label><input type='date' name='f_r_ini' id='f_r_ini'></label></td>";
+        $t .= "<td><label><input type='date' name='f_r_fin' id='f_r_fin'></label></td>";
+        $t .= "<td><label><input type='date' name='f_t_ini' id='f_t_ini'></label></td>";
+        $t .= "<td><label><input type='date' name='f_t_fin' id='f_t_fin'></label></td>";
+        $t .= "<td><label><input type='number' name='usu_id' id='usu_id' value='$usu' disabled></label></td>";
+        $t .= "<td><label><input type='number' name='duracion' id='duracion'></label></td>";
+        $t .= "<td><label><select>";
+        $sql2 = "SELECT * FROM situaciones";
+        $situaciones = json_decode(controlador::select($sql2), true);
+        for ($j = 0; $j <count($situaciones); $j++) {
+            $sit_nombre = $situaciones[$j]['sit_nombre'];
+            $sit_id = $situaciones[$j]['sit_id'];
+            $t .= "<option value='$sit_id'>" . $sit_nombre . "</option>";
+        }
+        $t .= "</select></label></td>";
+        $t .= "<td><label><input type='number' name='id_proy' id='proyecto_id' value='$id_proyecto' disabled></label></td>";
+        $t .= "<td><label><textarea name='obs' id='obs' cols='10' rows='2'></textarea></label></td>";
+        $t .= "<td><input type='hidden' name='agregar'>";
+        $t .= "<input type='submit' value='Agregar'></td>";
+        $t .= "</tr>";
         $t .= "</table>";
+        
         echo $t;
         ?>
     </div>
