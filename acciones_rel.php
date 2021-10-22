@@ -43,9 +43,16 @@ if (isset ($_POST['borrar'])) {
                         "<input type='hidden' name='borrar' value='$accion_id'><input type='submit' value='Borrar'>
                     </form>";
             $t .= "</td>";
-
             // if ($lista[$i]["acc_usu_id"] == $_SESSION['usuario']['usu_id']) {
-            //     $t .= "<td><frm method='POST'><input type='hidden' name='modificar' value='$lista[$i][\"acc_id\"]'><input type='submit' value='Modificar'></form>" . "<frm method='POST'><input type='hidden' name='borrar' value='$lista[$i][\"acc_id\"]'><input type='submit' value='Borrar'></form></td>";
+            //     $t .= "<td>";
+            //     $accion_id = $lista[$i]["acc_id"];
+            //     $t .= "<form action='acciones_frm.php' method='POST'>" .
+            //                 "<input type='hidden' name='modificar' value='$accion_id'><input type='submit' value='Modificar'>
+            //             </form>" . 
+            //             "<form action='' method='POST'>" .
+            //                 "<input type='hidden' name='borrar' value='$accion_id'><input type='submit' value='Borrar'>
+            //             </form>";
+            //     $t .= "</td>";
             // }else {
             //     $t .= "<td></td>";
             // }
