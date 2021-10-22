@@ -52,6 +52,9 @@ if (isset ($_POST['borrar'])) {
             
             $t .= "</tr>";
         }
+        $t .= "<form action='acciones_frm.php' method='POST'>" .
+                        "<input type='hidden' name='agregar'><input type='submit' value='Agregar'>
+                    </form>";
         $t .= "</table>";
         echo $t;
         ?>
