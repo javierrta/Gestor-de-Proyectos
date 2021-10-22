@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = "SELECT * FROM usuarios WHERE usu_nombre = '$username' AND usu_password = md5('$password')";
     $userData = json_decode(controlador::select($sql));
     if (count($userData) > 0) {
-        $_SESSION['usuario'] = $userData;
+        $_SESSION['usuario'] = $userData[0];
         header('Location: proyectos_rel.php');
         exit();
     } else {
