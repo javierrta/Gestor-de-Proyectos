@@ -5,7 +5,7 @@ require_once("controladores/controlador.php");
 $txt = "";
 $sql = "SELECT * FROM situaciones";
 $situaciones = json_decode(controlador::select($sql), true);
-var_dump($situaciones);
+//var_dump($situaciones);
 
 ?>
 <!DOCTYPE html>
