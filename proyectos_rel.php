@@ -85,6 +85,14 @@
             border:1px IndianRed solid;
             background-color:#FFC5BE;
         }
+        .button{
+            background-color:#FDEBD0;
+            width: 100%;
+            border: none;
+        }
+        .button:hover{
+            background-color: IndianRed;
+        }
     </style>
 </head>
 
@@ -92,6 +100,7 @@
     <main>
         <div>        
             <h1 style="color:IndianRed;text-align:center;">GESTOR DE PROYECTOS</h1>
+            <br>
             <h2 style="color:IndianRed;text-align:center;"><?=$usu_nombre?></h2>
         </div>
     
@@ -172,16 +181,10 @@
                         <td style="width:90px;text-align:center;">
                             <?php echo($registro->sit_nombre) ?>
                         </td>
-
-                    <?php if (($registro->proy_usu_id) == $usu_id) : ?>
-                        <td class="accion">Modificar</td>
-                        <td class="accion">Borrar</td>
-                        <td class="accion">Consultar</td>
-                    <?php endif; ?>
-
-                    <?php if (($registro->proy_usu_id) != $usu_id) : ?>
-                        <td colspan="3" class="accion">Consultar </td>                
-                    <?php endif; ?>
+                    
+                        <td class="accion" onclick="fModificar('m')">Modificar</td>
+                        <td class="accion" onclick="fBorrar('b')">Borrar</td>
+                        <td class="accion" onclick="fConsultar('c')">Consultar</td>                    
                 </tr>
                    
                 <?php endif; ?>
