@@ -39,7 +39,7 @@ if (isset ($_POST['modificar'])) {
             $t .= "<td>" . $lista[$i]["acc_proy_id"] . "</td>";
             $t .= "<td>" . $lista[$i]["acc_obs"] . "</td>";
             if ($lista[$i]["acc_usu_id"] == $_SESSION['usuario']['usu_id']) {
-                $t .= "<td><frm method='POST'><input type='hidden' name='modificar' value='$lista[$i][\"acc_id\"]'><input type='submit' value='Modificar'>" . "<input type='hidden' name='borrar' value='$lista[$i][\"acc_id\"]'><input type='submit' value='Borrar'></form></td>";
+                $t .= "<td><frm method='POST'><input type='hidden' name='modificar' value='$lista[$i][\"acc_id\"]'><input type='submit' value='Modificar'></form>" . "<frm method='POST'><input type='hidden' name='borrar' value='$lista[$i][\"acc_id\"]'><input type='submit' value='Borrar'></form></td>";
             }else {
                 $t .= "<td></td>";
             }
