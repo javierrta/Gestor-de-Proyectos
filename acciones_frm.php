@@ -27,21 +27,21 @@ if (isset($_POST['modificar'])) {
         $t .= "<label>ID situaciones<input type='number' name='situaciones_id' id='situaciones_id' value='$situaciones_id'></label>";
         $t .= "<label>ID del proyecto<input type='text' name='proyecto_id' id='proyecto_id' value='$proyecto_id'></label>";
         $t .= "<label>Observaciones<textarea name='obs' id='obs' cols='30' rows='10'>$observaciones</textarea></label>";
-        $t .= "<input type='hidden' value='modificado'>";
+        $t .= "<input type='hidden' name='modificado'>";
         $t .= "<input type='submit' value='Modificar'>";
     }
     $t .= "</form>";
 
     if (isset($_POST['modificado'])) {
         $nombre_v = $_POST['accion'];
-        $f_r_ini_v = $_POST['fecha_real_inicio'];
-        $f_r_fin_v = $_POST['fecha_real_fin'];
-        $f_t_ini_v = $_POST['fecha_teorica_inicio'];
-        $f_t_fin_v = $_POST['fecha_teorica_fin'];
+        $f_r_ini_v = $_POST['f_r_ini'];
+        $f_r_fin_v = $_POST['f_r_fin'];
+        $f_t_ini_v = $_POST['f_t_ini'];
+        $f_t_fin_v = $_POST['f_t_fin'];
         $usu_id_v = $_POST['usu_id'];
         $duracion_v = $_POST['duracion'];
-        $situaciones_id_v = $_POST['id_sit'];
-        $proyecto_id_v = $_POST['id_proy'];
+        $situaciones_id_v = $_POST['situaciones_id'];
+        $proyecto_id_v = $_POST['proyecto_id'];
         $observaciones_v = $_POST['obs'];
         $sql = "UPDATE acciones WHERE acc_id = $accion_id SET acc_nombre = '$nombre_v', acc_fr_inicio = $f_r_ini_v, acc_fr_fin = $f_r_fin_v, acc_ft_inicio = $f_t_ini_v, acc_ft_fin = $f_t_fin_v, acc_usu_id = $usu_id_v, acc_duracion = $duracion_v, acc_sit_id = $situaciones_id_v, acc_proy_id = $proyecto_id_v, acc_obs = '$observaciones_v')";
         $afectados = controlador::update($sql);
@@ -66,7 +66,6 @@ if (isset($_POST['modificar'])) {
     if (isset($_POST['agregar'])) {
     ?>
         <form action="" method="POST">
-            <input type="hidden" value="agregado">
             <label for="accion">Acción</label>
             <input type="text" name="accion" id="accion">
             <label for="fecha_real_inicio">Fecha real inicio</label>
@@ -86,19 +85,21 @@ if (isset($_POST['modificar'])) {
             <label for="id_proy">ID proyecto</label>
             <input type="number" name="id_proy" id="id_proy">
             <label>Observaciones<textarea name="obs" id="obs" cols="30" rows="10"></textarea></label>
+            <input type="hidden" name='agregado'>
             <input type="submit" value="Agregar">
         </form>
     <?php
         if (isset($_POST['agregado'])) {
+
             $nombre_v = $_POST['accion'];
-            $f_r_ini_v = $_POST['f_r_ini'];
-            $f_r_fin_v = $_POST['f_r_fin'];
-            $f_t_ini_v = $_POST['f_t_ini'];
-            $f_t_fin_v = $_POST['f_t_fin'];
+            $f_r_ini_v = $_POST['fecha_real_inicio'];
+            $f_r_fin_v = $_POST['fecha_real_fin'];
+            $f_t_ini_v = $_POST['fecha_teorica_inicio'];
+            $f_t_fin_v = $_POST['fecha_teorica_fin'];
             $usu_id_v = $_POST['usu_id'];
             $duracion_v = $_POST['duracion'];
-            $situaciones_id_v = $_POST['situaciones_id'];
-            $proyecto_id_v = $_POST['proyecto_id'];
+            $situaciones_id_v = $_POST['id_sit'];
+            $proyecto_id_v = $_POST['id_proy'];
             $observaciones_v = $_POST['obs'];
             $sql = "INSERT INTO acciones VALUES (null, '$nombre_v', $f_r_ini_v, $f_r_fin_v, $f_t_ini_v, $f_t_fin_v, $usu_id_v, $duracion_v, $situaciones_id_v, $proyecto_id_v, '$observaciones_v')";
             $id_agregado = controlador::insert($sql);

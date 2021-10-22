@@ -5,6 +5,22 @@ if (isset ($_POST['borrar'])) {
     $sql = "DELETE FROM acciones WHERE acc_id = $id_acc";
     controlador::delete($sql);
 }
+// if (isset($_POST['agregado'])) {
+//     $nombre_v = $_POST['accion'];
+//     $f_r_ini_v = $_POST['f_r_ini'];
+//     $f_r_fin_v = $_POST['f_r_fin'];
+//     $f_t_ini_v = $_POST['f_t_ini'];
+//     $f_t_fin_v = $_POST['f_t_fin'];
+//     $usu_id_v = $_POST['usu_id'];
+//     $duracion_v = $_POST['duracion'];
+//     $situaciones_id_v = $_POST['situaciones_id'];
+//     $proyecto_id_v = $_POST['proyecto_id'];
+//     $observaciones_v = $_POST['obs'];
+//     $sql = "INSERT INTO acciones VALUES (null, '$nombre_v', '$f_r_ini_v', '$f_r_fin_v', '$f_t_ini_v', '$f_t_fin_v', '$usu_id_v', '$duracion_v', '$situaciones_id_v', '$proyecto_id_v', '$observaciones_v')";
+//     echo $sql;
+    // $id_agregado = controlador::insert($sql);
+    
+// }
 ?>
 <!DOCTYPE html>
 <html lang="es">
