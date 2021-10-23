@@ -20,22 +20,83 @@ $situaciones = json_decode(controlador::select($sql), true);
         .div_frm_situaciones{
             display: none;
         }
+        frm_modificar_situaciones{
+            display: none;
+        }
     </style>
     <script>
         function fInicio() {
             //document.getElementById ("div_form_situaciones").innerHTML="Hola1"; 
         }
-        function fModificarSituacion(id,nombre){
-            //document.querySelector ("#div_form_situaciones").innerHTML="Hola2"+id+"Nombre"+nombre; 
+        function fInsertarSituacion() {
+            var nombre=document.getElementById("situacion").value;
+            if (nombre=="") {
+                alert("Campo vacio");
+            } else {
+                alert("Insertar: "+nombre);
+
+            }
         }
-        function fEliminarSituacion(id,nombre) {
-            //document.getElementById ("div_form_situaciones").innerHTML="Hola3"+id+"Nombre"+nombre;
-        }
-        function fInsertarSituacion(nombre) {
+        function fModificarSituacion() {
+            var nombre=document.getElementById("situacion2").value;
+            if (nombre=="") {
+                alert("Campo vacio");
+            } else {
+                alert("Modificar: "+nombre);
+            }
             
         }
-        function fMostrarFrmSituacion() {
+        function fEliminarSituacion() {
+            var nombre=document.getElementById("situacion").value;
+            if (nombre=="") {
+                alert("Campo vacio");
+            } else {
+                alert("Eliminar: "+nombre); 
+            }
+            
+        }
+        function fMostrarModificarSituacion(id,nombre){
+            //document.querySelector ("#div_form_situaciones").innerHTML="Hola2"+id+"Nombre"+nombre; 
+            document.getElementById("frm_modificar_situaciones").style.display="block";
+            document.getElementById("etiq_frm_situaciones").innerHTML="Modificar nombre situacion: ";
+            document.getElementById("situacion").disabled=true;
+            document.getElementById("situacion").value=nombre;
+            document.getElementById("multivalor").value="Modificar"; 
+            document.getElementById("multivalor").removeEventListener("click",fEliminarSituacion);
+            document.getElementById("multivalor").removeEventListener("click",fInsertarSituacion);
+            document.getElementById("multivalor").addEventListener("click",fModificarSituacion);  
             document.getElementById("div_frm_situaciones").style.display="block";
+            document.getElementById("situacion2").focus();
+            
+        }
+        function fMostrarEliminarSituacion(id,nombre) {
+            //document.getElementById ("div_form_situaciones").innerHTML="Hola3"+id+"Nombre"+nombre;
+            document.getElementById("frm_modificar_situaciones").style.display="none";
+            document.getElementById("etiq_frm_situaciones").innerHTML=" Eliminar  situacion: ";
+            document.getElementById("situacion").disabled=true;
+            document.getElementById("situacion").value=nombre;
+            document.getElementById("multivalor").value="Eliminar";
+            document.getElementById("multivalor").removeEventListener("click",fModificarSituacion);
+            document.getElementById("multivalor").removeEventListener("click",fInsertarSituacion);
+            document.getElementById("multivalor").addEventListener("click",fEliminarSituacion);
+            document.getElementById("div_frm_situaciones").style.display="block";
+        }
+
+        function fMostrarInsertarSituacion() {
+            document.getElementById("frm_modificar_situaciones").style.display="none";
+            document.getElementById("etiq_frm_situaciones").innerHTML="Insertar situacion: ";
+            document.getElementById("situacion").disabled=false;
+            document.getElementById("situacion").value="";
+            document.getElementById("situacion").focus();
+            //document.getElementById("situacion2").placeholder="";
+            document.getElementById("multivalor").value="Insertar ";
+            document.getElementById("multivalor").removeEventListener("click",fEliminarSituacion);
+            document.getElementById("multivalor").removeEventListener("click",fModificarSituacion);
+            document.getElementById("multivalor").addEventListener("click",fInsertarSituacion);
+            document.getElementById("div_frm_situaciones").style.display="block";
+        }
+        function fCancelarFrmSituacion() {
+            document.getElementById("div_frm_situaciones").style.display="none";
         }
     </script>
 </head>
@@ -55,15 +116,15 @@ $situaciones = json_decode(controlador::select($sql), true);
                 $id=$value['sit_id'];
                 $nombre=$value['sit_nombre'];
                 $txt .= "<tr><td>" . $value['sit_id'] . "</td><td>" . $value['sit_nombre'] . "</td>";
-                $txt .= "<td><input type='button' value='MODIFICAR' onclick='fModificarSituacion( \"$id\",\"$nombre\")' > ";
-                $txt.="<input type='button' value='ELIMINAR' onclick='fEliminarSituacion(\"$id\",\"$nombre\")'></tr>";
+                $txt .= "<td><input type='button' value='MODIFICAR' onclick='fMostrarModificarSituacion( \"$id\",\"$nombre\")' > ";
+                $txt.="<input type='button' value='ELIMINAR' onclick='fMostrarEliminarSituacion(\"$id\",\"$nombre\")'></tr>";
             }
             echo $txt;
             ?>
 
         </table>
         <div class="div_insertar">
-            <input type="button" value='AÑADIR SITUACION' onclick="fMostrarFrmSituacion()">
+            <input type="button" value='AÑADIR SITUACION' onclick="fMostrarInsertarSituacion()">
         </div>
         </form>
     </div>
