@@ -16,9 +16,26 @@ $situaciones = json_decode(controlador::select($sql), true);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relacion de Situaciones</title>
+    <style>
+        .div_frm_situaciones{
+            display: none;
+        }
+    </style>
     <script>
         function fInicio() {
-
+            //document.getElementById ("div_form_situaciones").innerHTML="Hola1"; 
+        }
+        function fModificarSituacion(id,nombre){
+            //document.querySelector ("#div_form_situaciones").innerHTML="Hola2"+id+"Nombre"+nombre; 
+        }
+        function fEliminarSituacion(id,nombre) {
+            //document.getElementById ("div_form_situaciones").innerHTML="Hola3"+id+"Nombre"+nombre;
+        }
+        function fInsertarSituacion(nombre) {
+            
+        }
+        function fMostrarFrmSituacion() {
+            document.getElementById("div_frm_situaciones").style.display="block";
         }
     </script>
 </head>
@@ -35,18 +52,26 @@ $situaciones = json_decode(controlador::select($sql), true);
             <?php
             $txt = "";
             foreach ($situaciones as $key => $value) {
-                //$txt="<tr><td>";
+                $id=$value['sit_id'];
+                $nombre=$value['sit_nombre'];
                 $txt .= "<tr><td>" . $value['sit_id'] . "</td><td>" . $value['sit_nombre'] . "</td>";
-                $txt .= "<td><input type='submit' value='MODIFICAR'><input type='submit' value='ELIMINAR'></tr>";
+                $txt .= "<td><input type='button' value='MODIFICAR' onclick='fModificarSituacion( \"$id\",\"$nombre\")' > ";
+                $txt.="<input type='button' value='ELIMINAR' onclick='fEliminarSituacion(\"$id\",\"$nombre\")'></tr>";
             }
             echo $txt;
             ?>
 
         </table>
         <div class="div_insertar">
-            <input type="submit" value='AÑADIR SITUACION'>
+            <input type="button" value='AÑADIR SITUACION' onclick="fMostrarFrmSituacion()">
         </div>
         </form>
+    </div>
+    <div id="div_form_situaciones" class="div_form_situaciones">
+            <?php
+                include_once("situaciones_frm.php");
+            ?>
+            
     </div>
 </body>
 
